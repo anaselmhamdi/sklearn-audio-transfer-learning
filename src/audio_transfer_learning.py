@@ -31,9 +31,9 @@ DATA_FOLDER = '../data/'
 config = {
     'dataset': 'ADSKIPPER',
     'num_classes_dataset': 2,
-    'audio_folder': DATA_FOLDER + 'audio/ADSKIPPER/',
-    'audio_paths_train': DATA_FOLDER + 'index/ADSKIPPER/train.txt',
-    'audio_paths_test': DATA_FOLDER + 'index/ADSKIPPER/test.txt',
+    'audio_folder': '/kaggle/input/kaggle_adskip_test' #DATA_FOLDER + 'audio/ADSKIPPER/',
+    'audio_paths_train': '/kaggle/working/sklearn-audio-transfer-learning/data/index/ADSKIPPER/train.txt',
+    'audio_paths_test': '/kaggle/working/sklearn-audio-transfer-learning/data/index/ADSKIPPER/test.txt',
     'batch_size': 1, # set very big for openl3 (memory bug)
     'features_type': 'vggish', # 'vggish' or 'openl3' or 'musicnn'
     'pca': 128, # resulting number of dimensions to be reduced to (e.g., 128), or False to desactivate it
