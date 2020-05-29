@@ -151,7 +151,6 @@ def extract_features_wrapper(paths, path2gt, model='vggish', save_as=False):
     batch_size = config['batch_size']
     first_batch = True
     for batch_id in tqdm(range(ceil(len(paths)/batch_size))):
-        print(batch_id)
         batch_paths = paths[(batch_id)*batch_size:(batch_id+1)*batch_size]
         [x, y, refs] = feature_extractor(batch_paths, path2gt, model)
         if first_batch:
@@ -173,8 +172,7 @@ def extract_features_wrapper(paths, path2gt, model='vggish', save_as=False):
     return [X, Y, IDS]
 
 
-if __name__ == '__main__':
-
+def run():
     # load train/test audio paths & ground truth variables
     [paths_train, path2gt_train, path2onehot_train] = utils.load_path2gt(config['audio_paths_train'], config)
     [paths_test, path2gt_test, path2onehot_test] = utils.load_path2gt(config['audio_paths_test'], config)
@@ -260,3 +258,6 @@ if __name__ == '__main__':
     print('Confusion matrix:')
     print(conf_matrix)    
     print('Accuracy: ' + str(acc))
+
+if __name__ == '__main__':
+    run()
