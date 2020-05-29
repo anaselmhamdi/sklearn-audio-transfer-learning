@@ -61,8 +61,15 @@ def path2gt_datasets(path, dataset):
         else:
             print('Did not find the corresponding ground truth (' + str(path) + ')!')
 
+    if dataset == 'ADSKIPPER':
+        if 'ad' in path:
+            return 0
+        elif 'content' in path:
+            return 1
+
     else:
             print('Did not find the implementation of ' + str(dataset) + ' dataset!')
+
 
 
 def matrix_visualization(matrix,title=None):

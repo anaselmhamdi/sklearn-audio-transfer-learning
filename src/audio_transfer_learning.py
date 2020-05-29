@@ -29,18 +29,18 @@ except:
 
 DATA_FOLDER = '../data/'
 config = {
-    'dataset': 'GTZAN',
-    'num_classes_dataset': 10,
-    'audio_folder': DATA_FOLDER + 'audio/GTZAN/genres/',
-    'audio_paths_train': DATA_FOLDER + 'index/GTZAN/train_filtered.txt',
-    'audio_paths_test': DATA_FOLDER + 'index/GTZAN/test_filtered.txt',
-    'batch_size': 8, # set very big for openl3 (memory bug)
-    'features_type': 'musicnn', # 'vggish' or 'openl3' or 'musicnn'
+    'dataset': 'ADSKIPPER',
+    'num_classes_dataset': 2,
+    'audio_folder': DATA_FOLDER + 'audio/ADSKIPPER/',
+    'audio_paths_train': DATA_FOLDER + 'index/ADSKIPPER/train.txt',
+    'audio_paths_test': DATA_FOLDER + 'index/ADSKIPPER/test.txt',
+    'batch_size': 1, # set very big for openl3 (memory bug)
+    'features_type': 'vggish', # 'vggish' or 'openl3' or 'musicnn'
     'pca': 128, # resulting number of dimensions to be reduced to (e.g., 128), or False to desactivate it
-    'model_type': 'SVM', # 'linearSVM', 'SVM', 'perceptron', 'MLP', 'kNN'
+    'model_type': 'linearSVM', # 'linearSVM', 'SVM', 'perceptron', 'MLP', 'kNN'
     # Data: False to compute features or load pre-computed using e.g. 'training_data_GTZAN_vggish.npz'
-    'load_training_data': 'training_data_GTZAN_MSDmusicnn_max_pool.npz', # False or 'training_data_GTZAN_vggish.npz', 
-    'load_evaluation_data': 'evaluation_data_GTZAN_MSDmusicnn_max_pool.npz' # False or 'evaluation_data_GTZAN_vggish.npz'
+    'load_training_data': False, # False or 'training_data_GTZAN_vggish.npz', 
+    'load_evaluation_data': False # False or 'evaluation_data_GTZAN_vggish.npz'
 }
 
 
@@ -151,6 +151,7 @@ def extract_features_wrapper(paths, path2gt, model='vggish', save_as=False):
     batch_size = config['batch_size']
     first_batch = True
     for batch_id in tqdm(range(ceil(len(paths)/batch_size))):
+        print(batch_id)
         batch_paths = paths[(batch_id)*batch_size:(batch_id+1)*batch_size]
         [x, y, refs] = feature_extractor(batch_paths, path2gt, model)
         if first_batch:
