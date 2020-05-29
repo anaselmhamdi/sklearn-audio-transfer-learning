@@ -3,7 +3,7 @@ import random
 import numpy as np
 from math import ceil
 from tqdm import tqdm
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.svm import LinearSVC
@@ -12,7 +12,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import decomposition
-
+tf.disable_v2_behavior()
 import vggish_input, vggish_slim, vggish_params, utils
 from utils import wavefile_to_waveform
 
