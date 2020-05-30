@@ -85,7 +85,7 @@ def extract_vggish_features(paths, path2gt, model):
             identifiers = np.concatenate((identifiers, tmp_id), axis=0)
 
     # 2) Load Tensorflow model to extract VGGish features
-    tfconfig = tfConfigProto(device_count = {"CPU":4},inter_op_parallelism_threads=4,intra_op_parallelism_threads=4)
+    tfconfig = tf.ConfigProto(device_count = {"CPU":4},inter_op_parallelism_threads=4,intra_op_parallelism_threads=4)
     with tf.Graph().as_default(), tf.Session(config=tfconfig) as sess:
         vggish_slim.define_vggish_slim(training=False)
         vggish_slim.load_vggish_slim_checkpoint(sess, '/kaggle/input/vggishmodel/vggish_model.ckpt')
