@@ -31,7 +31,7 @@ DATA_FOLDER = '../data/'
 config = {
     'dataset': 'ADSKIPPER',
     'num_classes_dataset': 2,
-    'audio_folder': '/kaggle/input/adskip-test/kaggle_adskip_test/, #DATA_FOLDER + 'audio/ADSKIPPER/',
+    'audio_folder': '/kaggle/input/adskip-test/kaggle_adskip_test/', #DATA_FOLDER + 'audio/ADSKIPPER/',
     'audio_paths_train': '/kaggle/working/sklearn-audio-transfer-learning/data/index/ADSKIPPER/train.txt',
     'audio_paths_test': '/kaggle/working/sklearn-audio-transfer-learning/data/index/ADSKIPPER/test.txt',
     'batch_size': 1, # set very big for openl3 (memory bug)
