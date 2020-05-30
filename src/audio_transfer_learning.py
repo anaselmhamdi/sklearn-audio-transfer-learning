@@ -37,7 +37,7 @@ config = {
     'batch_size': 1, # set very big for openl3 (memory bug)
     'features_type': 'vggish', # 'vggish' or 'openl3' or 'musicnn'
     'pca': 128, # resulting number of dimensions to be reduced to (e.g., 128), or False to desactivate it
-    'model_type': 'linearSVM', # 'linearSVM', 'SVM', 'perceptron', 'MLP', 'kNN'
+    'model_type': 'SVM', # 'linearSVM', 'SVM', 'perceptron', 'MLP', 'kNN'
     # Data: False to compute features or load pre-computed using e.g. 'training_data_GTZAN_vggish.npz'
     'load_training_data': False, # False or 'training_data_GTZAN_vggish.npz', 
     'load_evaluation_data': False # False or 'evaluation_data_GTZAN_vggish.npz'
@@ -85,7 +85,8 @@ def extract_vggish_features(paths, path2gt, model):
             identifiers = np.concatenate((identifiers, tmp_id), axis=0)
 
     # 2) Load Tensorflow model to extract VGGish features
-    with tf.Graph().as_default(), tf.Session() as sess:
+    tfconfig = tfConfigProto(device_count = {"CPU":4},inter_op_parallelism_threads=4,intra_op_parallelism_threads=4)
+    with tf.Graph().as_default(), tf.Session(config=tfconfig) as sess:
         vggish_slim.define_vggish_slim(training=False)
         vggish_slim.load_vggish_slim_checkpoint(sess, '/kaggle/input/vggishmodel/vggish_model.ckpt')
         features_tensor = sess.graph.get_tensor_by_name(vggish_params.INPUT_TENSOR_NAME)
