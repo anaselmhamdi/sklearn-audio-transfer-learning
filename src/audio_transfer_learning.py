@@ -87,7 +87,7 @@ def extract_vggish_features(paths, path2gt, model):
     # 2) Load Tensorflow model to extract VGGish features
     with tf.Graph().as_default(), tf.Session() as sess:
         vggish_slim.define_vggish_slim(training=False)
-        vggish_slim.load_vggish_slim_checkpoint(sess, 'kaggle/input/vggish-model/vggish_model.ckpt')
+        vggish_slim.load_vggish_slim_checkpoint(sess, 'kaggle/input/vggishmodel/vggish_model.ckpt')
         features_tensor = sess.graph.get_tensor_by_name(vggish_params.INPUT_TENSOR_NAME)
         embedding_tensor = sess.graph.get_tensor_by_name(vggish_params.OUTPUT_TENSOR_NAME)
         extracted_feat = sess.run([embedding_tensor], feed_dict={features_tensor: input_data})
